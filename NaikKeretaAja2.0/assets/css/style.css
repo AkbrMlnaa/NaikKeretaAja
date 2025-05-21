@@ -1,0 +1,17 @@
+.nav-link {
+    position: relative;
+    padding-bottom: 4px;
+}
+.nav-link::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    left: 0;
+    bottom: 0;
+    background-color: #166534;
+    transition: width 0.3s ease-in-out;
+}
+.nav-link:hover::after {
+    width: 100%;
+}
