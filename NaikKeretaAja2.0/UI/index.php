@@ -5,7 +5,7 @@ include '../functions/jadwalFunc.php';
 include '../functions/penumpangFunc.php';
 include_once '../functions/adminFunc.php'; 
 
-$jadwalTerlaris = getAllJadwal( 3); 
+$jadwalTerlaris = getAllJadwalAktif( 3); 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (isset($_POST['register'])) {
@@ -16,9 +16,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $alamat = $_POST['alamat'];
     $result = registerPenumpang($nama, $email, $telepon, $alamat, $password);
     if ($result) {
-      echo "<script>alert('Registrasi berhasil. Silakan login!');</script>";
+      echo "
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            showAlert('success', 'Registrasi Berhasil!', 'Login Untuk Bisa Membeli Tiket', 'index.php');
+          }); 
+        </script>";
     } else {
-      echo "<script>alert('Registrasi gagal. Email mungkin sudah digunakan.');</script>";
+      echo "  
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            showAlert('error', 'Registrasi Gagal!', 'Email Mungkin Sudah Digunakan', 'index.php');
+          }); 
+        </script>";
     }
   }
 
@@ -29,16 +39,29 @@ if (isset($_POST['login'])) {
 
   if ($user) {
     $_SESSION['penumpang'] = $user;
-    header('Location: index.php');
-    exit;
+     echo "
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            showAlert('success', 'Login Berhasil!', 'Berhasil Login Sebagai {$_SESSION['penumpang']['nama']}.', 'index.php');
+          }); 
+        </script>";
   } else {
     $admin = loginAdmin($usernameOrEmail, $password);
     if ($admin) {
       $_SESSION['admin'] = $admin;
-      header('Location: admin/dashboard.php');
-      exit;
+     echo "
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            showAlert('success', 'Login Berhasil!', 'Berhasil Login Sebagai {$_SESSION['admin']['nama']}.', 'admin/dashboard.php');
+          }); 
+        </script>";
     } else {
-      $loginError = "Email/Username atau password salah.";
+      echo "
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            showAlert('error', 'Login Gagal!', 'Email/Password Mungkin Salah', 'index.php');
+          }); 
+        </script>";
     }
   }
 }
@@ -53,6 +76,22 @@ if (isset($_POST['login'])) {
   <title>NaikKeretaAja</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    function showAlert(icon, title, text, redirectUrl = null, timer = 1800) {
+      Swal.fire({
+        icon: icon,
+        title: title,
+        text: text,
+        showConfirmButton: false,
+        timer: timer
+      }).then(() => {
+        if (redirectUrl) {
+          window.location.href = redirectUrl;
+        }
+      });
+    }
+  </script>
 </head>
 
 <body class="bg-white font-sans text-gray-800">
@@ -94,7 +133,6 @@ if (isset($_POST['login'])) {
     <form method="post">
       <input type="text" name="email" placeholder="Email atau Username" class="w-full mb-3 px-4 py-2 border rounded" required />
       <input type="password" name="password" placeholder="Password" class="w-full mb-3 px-4 py-2 border rounded" required />
-      <?php if (isset($loginError)) echo "<p class='text-red-500 text-sm mb-2'>$loginError</p>"; ?>
       <button type="submit" name="login" class="w-full bg-green-700 text-white py-2 rounded hover:bg-green-800">Masuk</button>
     </form>
 
@@ -173,18 +211,18 @@ if (isset($_POST['login'])) {
               Rp.<?= number_format($jadwal['harga'], 0, ',', '.') ?> 
               <sub class="text-gray-400 text-xs">/Tiket</sub>
             </h3>
-            <?php if (isset($_SESSION['penumpang'])): ?>
-              <a href="beli.php?id_jadwal=<?= $jadwal['id_jadwal'] ?>" 
-                class="w-full mt-4 block text-center px-4 py-2 text-sm font-semibold text-white bg-green-700 hover:bg-green-800 rounded-md">
-                Beli tiket
-              </a>
-            <?php else: ?>
-              <button onclick="openForm('loginForm')" 
-                      class="w-full mt-4 block text-center px-4 py-2 text-sm font-semibold text-white bg-gray-600 hover:bg-gray-700 rounded-md cursor-pointer">
-                Harap Login untuk membeli tiket
-              </button>
-            <?php endif; ?>
-
+                          <?php if (isset($_SESSION['penumpang'])): ?>
+                <a href="beli.php?id_jadwal=<?= $jadwal['id_jadwal'] ?>"
+                  class="w-full mt-4 block text-center px-4 py-2 text-sm font-semibold text-white bg-green-700 hover:bg-green-800 rounded-md">
+                  Beli tiket
+                </a>
+              <?php elseif (isset($_SESSION['admin'])): ?>
+              <?php else: ?>
+                <button onclick="openForm('loginForm')"
+                  class="w-full mt-4 block text-center px-4 py-2 text-sm font-semibold text-white bg-gray-600 hover:bg-gray-700 rounded-md cursor-pointer">
+                  Harap Login untuk membeli tiket
+                </button>
+              <?php endif; ?>
           </div>
         </div>
       <?php endforeach; ?>

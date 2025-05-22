@@ -1,6 +1,9 @@
 <?php
 session_start();
-
+if (!isset($_SESSION['penumpang'])) {
+    header('Location: index.php');
+    exit;
+}
 $berhasil = isset($_GET['success']) && $_GET['success'] == 1;
 ?>
 

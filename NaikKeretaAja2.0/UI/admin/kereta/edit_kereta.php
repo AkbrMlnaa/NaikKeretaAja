@@ -1,39 +1,73 @@
 <?php
 require_once '../../../functions/keretaFunc.php';
+session_start();
+if (!isset($_SESSION['admin'])) {
+  header('Location: ../../index.php');
+  exit();
+}
 
 $id = $_GET['id'] ?? null;
 
 if (!$id) {
-    header("Location: kereta.php");
-    exit;
+  header("Location: kereta.php");
+  exit;
 }
 
 $data = getKeretaById($id);
 
 if (!$data) {
-    echo "Data tidak ditemukan.";
-    exit;
+  echo "Data tidak ditemukan.";
+  exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nama = $_POST['nama_kereta'];
-    $kelas = $_POST['kelas_kereta'];
-    $kapasitas = $_POST['kapasitas'];
+  $nama = $_POST['nama_kereta'];
+  $kelas = $_POST['kelas_kereta'];
+  $kapasitas = $_POST['kapasitas'];
 
-    if (updateKereta($id, $nama, $kelas, $kapasitas)) {
-        header("Location: kereta.php");
-        exit;
-    }
+  if (updateKereta($id, $nama, $kelas, $kapasitas)) {
+    echo "
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            showAlert('success', 'Berhasil', 'Data Kereta Berhasil Diedit!', 'kereta.php');
+          }); 
+        </script>";
+  } else {
+    echo "
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            showAlert('erro', 'Gagal', 'Data Kereta Gagal Diedit!', 'kereta.php');
+          }); 
+        </script>";
+  }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8" />
   <title>Edit Kereta - NaikKeretaAja</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    function showAlert(icon, title, text, redirectUrl = null, timer = 1800) {
+      Swal.fire({
+        icon: icon,
+        title: title,
+        text: text,
+        showConfirmButton: false,
+        timer: timer
+      }).then(() => {
+        if (redirectUrl) {
+          window.location.href = redirectUrl;
+        }
+      });
+    }
+  </script>
 </head>
+
 <body class="bg-gray-100 p-6">
 
   <div class="max-w-xl mx-auto bg-white p-6 rounded shadow">
@@ -67,4 +101,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
 
 </body>
+
 </html>

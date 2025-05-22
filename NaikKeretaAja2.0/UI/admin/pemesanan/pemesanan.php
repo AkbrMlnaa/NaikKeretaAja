@@ -1,19 +1,25 @@
 <?php
 require_once '../../../functions/pemesananFunc.php';
+session_start();
+if (!isset($_SESSION['admin'])) {
+  header('Location: ../../index.php');
+  exit();
+}
 
 // Ambil data dari database
 $result = getAllPemesanan();
 $pemesanans = [];
 
 if ($result) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        $pemesanans[] = $row;
-    }
+  while ($row = mysqli_fetch_assoc($result)) {
+    $pemesanans[] = $row;
+  }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,7 +27,8 @@ if ($result) {
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans pt-16">
+
+<body class="bg-gray-50 text-gray-800 font-sans">
 
   <section class="bg-white pt-10 pb-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4">
@@ -76,4 +83,5 @@ if ($result) {
   </section>
 
 </body>
+
 </html>

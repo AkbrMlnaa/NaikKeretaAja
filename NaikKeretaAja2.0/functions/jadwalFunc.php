@@ -19,6 +19,23 @@ function getAllJadwal($limit = null) {
     }
     return $data;
 }
+function getAllJadwalAktif($limit = null) {
+    global $conn;
+    $query = "
+        SELECT * from view_jadwal_kereta_aktif
+    ";
+
+    if ($limit) {
+        $query .= " LIMIT " . intval($limit);
+    }
+
+    $result = mysqli_query($conn, $query);
+    $data = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $data[] = $row;
+    }
+    return $data;
+}
 function getAllJadwalById($id_jadwal) {
     global $conn;
 

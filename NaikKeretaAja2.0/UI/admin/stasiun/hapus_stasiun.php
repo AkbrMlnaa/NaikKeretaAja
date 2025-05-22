@@ -1,22 +1,27 @@
 <?php
 session_start();
-require_once '../../../functions/keretaFunc.php';
+require_once '../../../functions/stasiunFunc.php';
+
+if (!isset($_SESSION['admin'])) {
+    header('Location: ../../index.php');
+    exit();
+}
 
 if (isset($_GET['id'])) {
-    $id_kereta = $_GET['id'];
-    $success = deleteKereta($id_kereta);
+    $id_stasiun = $_GET['id'];
+    $success = deleteStasiun($id_stasiun);
     $status = $success ? 'success' : 'error';
     $title = $success ? 'Berhasil' : 'Gagal';
-    $text = $success ? 'Data Kereta Berhasil Dihapus!' : 'Gagal Menghapus Data Kereta!';
-    $redirect = 'kereta.php'; 
-}
+    $text = $success ? 'Data Stasiun Berhasil Dihapus!' : 'Gagal Menghapus Data Stasiun!';
+    $redirect = 'stasiun.php';
+} 
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8" />
-    <title>Hapus Kereta</title>
+    <meta charset="UTF-8">
+    <title>Hapus Stasiun</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>

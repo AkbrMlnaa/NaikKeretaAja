@@ -12,11 +12,13 @@ function loginPenumpang($email, $password) {
   $result = mysqli_query($conn, "SELECT * FROM penumpang WHERE email = '$email'");
   if (mysqli_num_rows($result) === 1) {
     $user = mysqli_fetch_assoc($result);
-    if ($password) {
+    if ($user['PASSWORD'] === $password) {
       return $user;
     }
+    else {
+        return false;
+    }
   }
-  return false;
 }
 function getAllPenumpang() {
     global $conn;

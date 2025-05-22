@@ -3,7 +3,7 @@ session_start();
 require_once '../config/config.php';
 require_once '../functions/pemesananFunc.php'; 
 if (!isset($_SESSION['penumpang'])) {
-    header('Location: login.php');
+    header('Location: index.php');
     exit;
 }
 

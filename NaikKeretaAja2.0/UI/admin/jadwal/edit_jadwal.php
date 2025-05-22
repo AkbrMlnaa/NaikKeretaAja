@@ -1,56 +1,82 @@
 <?php
 require_once '../../../functions/jadwalFunc.php';
 require_once '../../../config/config.php';
+session_start();
+if (!isset($_SESSION['admin'])) {
+  header('Location: ../../index.php');
+  exit();
+}
 
 // Validasi ID
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    die('ID jadwal tidak valid.');
+  die('ID jadwal tidak valid.');
 }
 
 $id = (int) $_GET['id'];
 $jadwal = getJadwalById($id);
 
 if (!$jadwal) {
-    die('Data jadwal tidak ditemukan.');
+  die('Data jadwal tidak ditemukan.');
 }
 
-// Ambil data dropdown (kereta dan stasiun)
 $kereta = mysqli_query($conn, "SELECT id_kereta, nama_kereta FROM kereta");
 $stasiun = mysqli_query($conn, "SELECT id_stasiun, nama_stasiun FROM stasiun");
 
-// Proses update
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id_kereta = $_POST['id_kereta'];
-    $id_stasiun_asal = $_POST['id_stasiun_asal'];
-    $id_stasiun_tujuan = $_POST['id_stasiun_tujuan'];
-    $waktu_berangkat = $_POST['waktu_berangkat'];
-    $harga = $_POST['harga'];
 
-    $hasil = updateJadwal($id, $id_kereta, $id_stasiun_asal, $id_stasiun_tujuan, $waktu_berangkat, $harga);
-    if ($hasil) {
-        header("Location: jadwal.php");
-        exit;
-    } else {
-        $error = "Gagal memperbarui jadwal.";
-    }
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $id_kereta = $_POST['id_kereta'];
+  $id_stasiun_asal = $_POST['id_stasiun_asal'];
+  $id_stasiun_tujuan = $_POST['id_stasiun_tujuan'];
+  $waktu_berangkat = $_POST['waktu_berangkat'];
+  $harga = $_POST['harga'];
+
+  $hasil = updateJadwal($id, $id_kereta, $id_stasiun_asal, $id_stasiun_tujuan, $waktu_berangkat, $harga);
+  if ($hasil) {
+    echo "
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            showAlert('success', 'Berhasil', 'Data Jadwal Berhasil Diedit!', 'jadwal.php');
+          }); 
+        </script>";
+  } else {
+    echo "
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            showAlert('error', 'Gagal', 'Data Jadwal Gagal Diedit!', 'jadwal.php');
+          }); 
+        </script>";
+  }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <title>Edit Jadwal</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    function showAlert(icon, title, text, redirectUrl = null, timer = 1800) {
+      Swal.fire({
+        icon: icon,
+        title: title,
+        text: text,
+        showConfirmButton: false,
+        timer: timer
+      }).then(() => {
+        if (redirectUrl) {
+          window.location.href = redirectUrl;
+        }
+      });
+    }
+  </script>
 </head>
+
 <body class="bg-gray-100 min-h-screen py-10 px-4">
   <div class="max-w-xl mx-auto bg-white p-8 rounded shadow-md">
     <h2 class="text-2xl font-bold text-green-800 mb-6 text-center">Edit Jadwal Kereta</h2>
-
-    <?php if (isset($error)): ?>
-      <div class="bg-red-100 text-red-700 px-4 py-2 rounded mb-4"><?= $error ?></div>
-    <?php endif; ?>
-
     <form method="POST" class="space-y-4">
       <div>
         <label class="block font-medium">Kereta</label>
@@ -68,7 +94,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label class="block font-medium">Stasiun Asal</label>
         <select name="id_stasiun_asal" class="w-full border px-3 py-2 rounded" required>
           <option disabled selected>-- Pilih Stasiun Asal --</option>
-          <?php mysqli_data_seek($stasiun, 0); while ($row = mysqli_fetch_assoc($stasiun)): ?>
+          <?php mysqli_data_seek($stasiun, 0);
+          while ($row = mysqli_fetch_assoc($stasiun)): ?>
             <option value="<?= $row['id_stasiun'] ?>" <?= $jadwal['id_stasiun_asal'] == $row['id_stasiun'] ? 'selected' : '' ?>>
               <?= htmlspecialchars($row['nama_stasiun']) ?>
             </option>
@@ -80,7 +107,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label class="block font-medium">Stasiun Tujuan</label>
         <select name="id_stasiun_tujuan" class="w-full border px-3 py-2 rounded" required>
           <option disabled selected>-- Pilih Stasiun Tujuan --</option>
-          <?php mysqli_data_seek($stasiun, 0); while ($row = mysqli_fetch_assoc($stasiun)): ?>
+          <?php mysqli_data_seek($stasiun, 0);
+          while ($row = mysqli_fetch_assoc($stasiun)): ?>
             <option value="<?= $row['id_stasiun'] ?>" <?= $jadwal['id_stasiun_tujuan'] == $row['id_stasiun'] ? 'selected' : '' ?>>
               <?= htmlspecialchars($row['nama_stasiun']) ?>
             </option>
@@ -105,4 +133,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
   </div>
 </body>
+
 </html>

@@ -1,14 +1,14 @@
 <?php
 session_start();
-require_once '../../../functions/keretaFunc.php';
+require_once '../../../functions/jadwalFunc.php';
 
 if (isset($_GET['id'])) {
-    $id_kereta = $_GET['id'];
-    $success = deleteKereta($id_kereta);
+    $id_jadwal = $_GET['id'];
+    $success = hapusJadwal($id_jadwal);
     $status = $success ? 'success' : 'error';
     $title = $success ? 'Berhasil' : 'Gagal';
-    $text = $success ? 'Data Kereta Berhasil Dihapus!' : 'Gagal Menghapus Data Kereta!';
-    $redirect = 'kereta.php'; 
+    $text = $success ? 'Data Jadwal Berhasil Dihapus!' : 'Gagal Menghapus Data Jadwal!';
+    $redirect = 'jadwal.php';
 }
 ?>
 
@@ -16,7 +16,7 @@ if (isset($_GET['id'])) {
 <html lang="id">
 <head>
     <meta charset="UTF-8" />
-    <title>Hapus Kereta</title>
+    <title>Hapus Jadwal</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
