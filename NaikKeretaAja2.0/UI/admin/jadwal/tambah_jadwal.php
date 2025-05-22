@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8" />
     <title>Tambah Jadwal Kereta</title>
@@ -53,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </script>
 </head>
+
 <body class="bg-gray-100 min-h-screen flex items-center justify-center px-4">
     <div class="bg-white shadow-xl rounded-xl p-8 w-full max-w-md">
         <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Tambah Jadwal Kereta</h2>
@@ -106,4 +108,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     </div>
 </body>
+
 </html>

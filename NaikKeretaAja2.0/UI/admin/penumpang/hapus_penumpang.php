@@ -18,7 +18,7 @@ if (isset($_GET['id'])) {
 <html lang="id">
 
 <head>
-<meta charset="UTF-8" />
+    <meta charset="UTF-8" />
     <title>Hapus Penumpang</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>

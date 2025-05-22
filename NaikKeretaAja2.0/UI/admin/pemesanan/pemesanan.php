@@ -29,21 +29,14 @@ if ($result) {
 </head>
 
 <body class="bg-gray-50 text-gray-800 font-sans">
-
   <section class="bg-white pt-10 pb-10 min-h-screen">
     <div class="max-w-7xl mx-auto px-4">
-
-      <!-- Tombol Kembali -->
       <div class="mb-4">
         <a href="../dashboard.php" class="bg-gray-200 text-gray-800 px-4 py-2 rounded hover:bg-gray-300 text-sm inline-block">
           ← Kembali
         </a>
       </div>
-
-      <!-- Judul -->
       <h2 class="text-3xl font-bold text-green-800 mb-8 text-center">Data Pemesanan Tiket</h2>
-
-      <!-- Tabel Data Pemesanan -->
       <div class="overflow-x-auto bg-gray-50 p-4 rounded-md shadow-md">
         <table class="min-w-full text-center text-sm">
           <thead class="border-b-2 bg-green-700 text-white">

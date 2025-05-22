@@ -8,17 +8,19 @@ if (isset($_GET['id'])) {
     $status = $success ? 'success' : 'error';
     $title = $success ? 'Berhasil' : 'Gagal';
     $text = $success ? 'Data Kereta Berhasil Dihapus!' : 'Gagal Menghapus Data Kereta!';
-    $redirect = 'kereta.php'; 
+    $redirect = 'kereta.php';
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8" />
     <title>Hapus Kereta</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+
 <body>
     <script>
         Swal.fire({
@@ -32,4 +34,5 @@ if (isset($_GET['id'])) {
         });
     </script>
 </body>
+
 </html>

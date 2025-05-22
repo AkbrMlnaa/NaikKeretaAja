@@ -37,6 +37,7 @@ $jadwals = getAllJadwal();
     }
   </script>
 </head>
+
 <body class="bg-gray-50 text-gray-800 font-sans">
   <section class="bg-white pt-10 pb-16 min-h-screen">
     <div class="max-w-7xl mx-auto px-4">
@@ -91,4 +92,5 @@ $jadwals = getAllJadwal();
     </div>
   </section>
 </body>
+
 </html>

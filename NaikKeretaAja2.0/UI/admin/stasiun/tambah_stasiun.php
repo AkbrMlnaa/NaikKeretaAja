@@ -51,11 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="bg-gray-100 py-10">
   <div class="max-w-xl mx-auto bg-white p-6 rounded shadow">
     <h2 class="text-2xl font-bold text-green-800 mb-6">Tambah Stasiun</h2>
-
     <?php if (isset($error)): ?>
       <p class="text-red-500 mb-4"><?= $error ?></p>
     <?php endif; ?>
-
     <form method="POST">
       <div class="mb-4">
         <label class="block mb-1">Nama Stasiun</label>

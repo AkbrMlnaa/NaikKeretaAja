@@ -22,7 +22,6 @@ function getKeretaById($id) {
     return mysqli_fetch_assoc($result);
 }
 
-
 function addKereta($nama, $kelas, $kapasitas) {
     global $conn;
 
@@ -35,8 +34,6 @@ function addKereta($nama, $kelas, $kapasitas) {
     return mysqli_query($conn, $sql);
 }
 
-
-// Edit data kereta
 function updateKereta($id, $nama, $kelas, $kapasitas) {
     global $conn;
 
@@ -52,7 +49,6 @@ function updateKereta($id, $nama, $kelas, $kapasitas) {
     return mysqli_query($conn, $sql);
 }
 
-// Hapus data kereta
 function deleteKereta($id) {
     global $conn;
 

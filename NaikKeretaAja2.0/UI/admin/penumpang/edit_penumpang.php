@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           }); 
         </script>";
   } else {
-     echo "
+    echo "
         <script>
           document.addEventListener('DOMContentLoaded', function() {
             showAlert('error', 'Gagal', 'Data Penumpang Gagal Diedit!', 'penumpang.php');
@@ -45,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -67,6 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
   </script>
 </head>
+
 <body class="bg-gray-100 min-h-screen py-10 px-4">
   <div class="max-w-xl mx-auto bg-white p-8 rounded shadow-md">
     <h2 class="text-2xl font-bold text-green-800 mb-6 text-center">Edit Data Penumpang</h2>
@@ -98,4 +100,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
   </div>
 </body>
+
 </html>

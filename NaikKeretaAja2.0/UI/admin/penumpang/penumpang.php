@@ -39,8 +39,6 @@ $penumpangs = getAllPenumpang();
 </head>
 
 <body class="bg-gray-50 text-gray-800 font-sans">
-
-  <!-- Main Section -->
   <section class="bg-white pt-10 pb-16 min-h-screen">
     <div class="max-w-7xl mx-auto px-4">
 
@@ -49,15 +47,12 @@ $penumpangs = getAllPenumpang();
           ← Kembali
         </a>
       </div>
-
       <h2 class="text-3xl font-bold text-green-800 mb-8 text-center">Manajemen Data Penumpang</h2>
-
       <div class="mb-6 text-right">
         <a href="tambah_penumpang.php" class="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 text-sm">
           Tambah Penumpang
         </a>
       </div>
-
       <div class="overflow-x-auto bg-gray-50 p-4 rounded-md shadow-md">
         <table class="w-full text-center rounded-lg text-sm overflow-hidden">
           <thead class="border-b-2 bg-green-700 border-green-700 text-white">
@@ -86,7 +81,6 @@ $penumpangs = getAllPenumpang();
                   <td class="px-4 py-4 space-x-2">
                     <a href="edit_penumpang.php?id=<?= $p['id_penumpang'] ?>" class="bg-yellow-500 hover:bg-yellow-700 text-white px-3 py-1 rounded">Edit</a>
                     <button onclick="confirmDelete(<?= $p['id_penumpang'] ?>)" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded">Hapus</button>
-
                   </td>
                 </tr>
               <?php endforeach ?>
@@ -96,7 +90,6 @@ $penumpangs = getAllPenumpang();
       </div>
     </div>
   </section>
-
 </body>
 
 </html>

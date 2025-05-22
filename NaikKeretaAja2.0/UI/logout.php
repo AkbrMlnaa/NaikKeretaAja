@@ -6,11 +6,13 @@ session_destroy();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Logout</title>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+
 <body>
   <script>
     Swal.fire({
@@ -24,4 +26,5 @@ session_destroy();
     });
   </script>
 </body>
+
 </html>

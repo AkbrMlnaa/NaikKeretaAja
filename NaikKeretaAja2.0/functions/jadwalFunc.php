@@ -62,13 +62,6 @@ function getAllJadwalById($id_jadwal) {
     return mysqli_fetch_assoc($result); // HANYA 1 baris
 }
 
-
-
-
-
-
-
-// Ambil data jadwal berdasarkan ID
 function getJadwalById($id_jadwal) {
     global $conn;
     $id_jadwal = intval($id_jadwal);
@@ -77,7 +70,6 @@ function getJadwalById($id_jadwal) {
     return mysqli_fetch_assoc($result);
 }
 
-// Tambah jadwal baru
 function addJadwal($id_kereta, $id_stasiun_asal, $id_stasiun_tujuan, $waktu_berangkat, $harga) {
     global $conn;
     $query = "INSERT INTO jadwal (id_kereta, id_stasiun_asal, id_stasiun_tujuan, waktu_berangkat, harga)
@@ -91,8 +83,6 @@ function addJadwal($id_kereta, $id_stasiun_asal, $id_stasiun_tujuan, $waktu_bera
     return mysqli_stmt_execute($stmt);
 }
 
-
-// Update data jadwal
 function updateJadwal($id_jadwal, $id_kereta, $id_stasiun_asal, $id_stasiun_tujuan, $waktu_berangkat, $harga) {
     global $conn;
     $query = "UPDATE jadwal 
@@ -103,7 +93,6 @@ function updateJadwal($id_jadwal, $id_kereta, $id_stasiun_asal, $id_stasiun_tuju
     return mysqli_stmt_execute($stmt);
 }
 
-// Hapus jadwal
 function hapusJadwal($id_jadwal) {
     global $conn;
     $query = "DELETE FROM jadwal WHERE id_jadwal = ?";

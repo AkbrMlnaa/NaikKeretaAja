@@ -1,15 +1,15 @@
 <?php
 require_once __DIR__ . '/../config/config.php';
 
-// Ambil semua data pemesanan (gunakan JOIN untuk informasi lengkap)
-function getAllPemesanan() {
+function getAllPemesanan()
+{
     global $conn;
     $sql = "SELECT * FROM view_data_pemesanan";
     return mysqli_query($conn, $sql);
 }
 
-// Tambah pemesanan baru
-function addPemesanan($id_penumpang, $id_jadwal, $jumlah_tiket, $total_harga) {
+function addPemesanan($id_penumpang, $id_jadwal, $jumlah_tiket, $total_harga)
+{
     global $conn;
 
     $query = "CALL tambah_pemesanan($id_penumpang, $id_jadwal, $jumlah_tiket, $total_harga)";
@@ -17,7 +17,8 @@ function addPemesanan($id_penumpang, $id_jadwal, $jumlah_tiket, $total_harga) {
 
     return $result ? true : false;
 }
-function getPemesananByPenumpang($id_penumpang) {
+function getPemesananByPenumpang($id_penumpang)
+{
     global $conn;
 
     $query = "

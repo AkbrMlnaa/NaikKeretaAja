@@ -119,14 +119,12 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && (
 </head>
 
 <body class="bg-gray-50 pt-20 text-gray-800 font-sans">
-
   <header class="fixed top-0 left-0 w-full backdrop-blur-md bg-white/70 shadow-md z-50">
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
       <h1 class="text-2xl font-bold text-green-800">NaikKeretaAja</h1>
       <nav class="space-x-4 text-xl">
         <a href="index.php" class="nav-link text-green-800 font-semibold">Home</a>
         <a href="pencarian.php" class="nav-link text-green-800 font-semibold">Pencarian</a>
-
         <?php if (isset($_SESSION['admin'])): ?>
           <a href="admin/dashboard.php" class="nav-link text-green-800 font-semibold">Dashboard</a>
         <?php elseif (isset($_SESSION['penumpang'])): ?>
@@ -147,11 +145,9 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && (
       </div>
     </div>
   </header>
-
   <main class="bg-white py-10">
     <div class="max-w-4xl mx-auto px-4">
       <h2 class="text-3xl font-bold text-center mb-6 text-green-800">Cari Tiket Kereta</h2>
-
       <form action="pencarian.php" method="GET" class="grid md:grid-cols-2 gap-6 bg-gray-50 p-6 rounded shadow">
         <div>
           <label for="stasiun_awal" class="block font-medium mb-1">Stasiun Awal</label>
@@ -164,7 +160,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && (
             <?php endforeach; ?>
           </select>
         </div>
-
         <div>
           <label for="stasiun_tujuan" class="block font-medium mb-1">Stasiun Tujuan</label>
           <select name="stasiun_tujuan" id="stasiun_tujuan" class="w-full border rounded px-4 py-2 focus:ring-2 focus:ring-green-700">
@@ -176,7 +171,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && (
             <?php endforeach; ?>
           </select>
         </div>
-
         <div>
           <label for="kelas" class="block font-medium mb-1">Kelas Kereta</label>
           <select name="kelas" id="kelas" class="w-full border rounded px-4 py-2 focus:ring-2 focus:ring-green-700">
@@ -186,7 +180,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && (
             <option value="eksekutif" <?= ($_GET['kelas'] ?? '') === 'eksekutif' ? 'selected' : '' ?>>Eksekutif</option>
           </select>
         </div>
-
         <div>
           <label for="tanggal" class="block font-medium mb-1">Tanggal Keberangkatan</label>
           <input type="date" name="tanggal" id="tanggal" class="w-full border rounded px-4 py-2 focus:ring-2 focus:ring-green-700" value="<?= htmlspecialchars($_GET['tanggal'] ?? '') ?>" />
@@ -199,7 +192,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && (
       </form>
     </div>
   </main>
-
   <section class="bg-white py-16">
     <div class="max-w-7xl mx-auto px-4">
       <h1 class="text-3xl font-bold text-center mb-12 text-green-800">Daftar Tiket Kereta</h1>
@@ -208,24 +200,20 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && (
           <div class="border shadow-md rounded-md p-6 transition-transform duration-300 hover:scale-[1.02]">
             <h3 class="text-2xl font-semibold mb-1 text-green-800"><?= htmlspecialchars($jadwal['nama_kereta']) ?></h3>
             <p class="text-sm text-gray-500 mb-2"><?= htmlspecialchars($jadwal['kelas_kereta']) ?></p>
-
             <div class="mt-2">
               <h4 class="text-xl font-semibold">Stasiun Awal :</h4>
               <p class="text-sm text-gray-500"><?= htmlspecialchars($jadwal['stasiun_asal']) ?></p>
             </div>
-
             <div class="mt-2">
               <h4 class="text-xl font-semibold">Stasiun Tujuan :</h4>
               <p class="text-sm text-gray-500"><?= htmlspecialchars($jadwal['stasiun_tujuan']) ?></p>
             </div>
-
             <div class="mt-2">
               <h4 class="text-xl font-semibold">Pemberangkatan :</h4>
               <p class="text-sm text-gray-500">
                 <?= date('l, d M Y H:i', strtotime($jadwal['waktu_berangkat'])) ?>
               </p>
             </div>
-
             <div class="mt-4">
               <h3 class="text-2xl font-semibold text-green-700">
                 Rp.<?= number_format($jadwal['harga'], 0, ',', '.') ?>
@@ -250,14 +238,14 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && (
     </div>
   </section>
 
-    <footer class="bg-gray-100 text-center text-sm text-gray-600 py-6 border-t">
+  <footer class="bg-gray-100 text-center text-sm text-gray-600 py-6 border-t">
     <div class="max-w-4xl mx-auto px-4">
-      <p>Kami menggunakan cookie untuk memastikan bahwa situs web kami bekerja dengan baik dan memberikan pengalaman terbaik. Lihat 
-        <a href="#" class="text-blue-600 hover:underline">Kebijakan Cookie</a> kami.</p>
+      <p>Kami menggunakan cookie untuk memastikan bahwa situs web kami bekerja dengan baik dan memberikan pengalaman terbaik. Lihat
+        <a href="#" class="text-blue-600 hover:underline">Kebijakan Cookie</a> kami.
+      </p>
       <p class="mt-2">© 2025 NaikKeretaAja. Dibuat oleh <strong>Akbar Maulana Husada</strong>.</p>
     </div>
   </footer>
-
 
   <!-- Modal Login -->
   <div id="loginForm" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -300,7 +288,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && (
       document.getElementById(id).classList.add('hidden');
     }
   </script>
-
 </body>
 
 </html>

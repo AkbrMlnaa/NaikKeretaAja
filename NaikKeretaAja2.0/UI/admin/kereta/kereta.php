@@ -11,6 +11,7 @@ $daftarKereta = getAllKereta();
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -37,6 +38,7 @@ $daftarKereta = getAllKereta();
     }
   </script>
 </head>
+
 <body class="bg-gray-50 text-gray-800 font-sans">
   <section class="bg-white pt-10 pb-16 min-h-screen">
     <div class="max-w-7xl mx-auto px-4">
